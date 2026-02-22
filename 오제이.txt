@@ -1,0 +1,7 @@
+STM32F103C8T6
+
+Reference : STM32F103C8Tx
+Core : Arm Cortex-M3
+Package : LQFP48
+Flash : 64 KBytes
+Ram : 20KBytes
