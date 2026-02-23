@@ -32,6 +32,14 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define FALSE 0x00U
+#define TRUE  0x01U
+#define LOW   0x00U
+#define HIGH  0x01U
+
+typedef unsigned char u8;
+typedef unsigned short u16;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -64,7 +72,7 @@ static void MX_GPIO_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
+  u8 isSwitch = 0x0u;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -93,9 +101,13 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET);
-	  HAL_Delay(100);
-	  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_RESET);
+	  isSwitch = HAL_GPIO_ReadPin(GPIO_SW_GPIO_Port, GPIO_SW_Pin); // sw Pull-Up Active-low
+
+	  if(isSwitch == LOW){
+		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_RESET); // turn-on led
+	  }else{
+		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET); // turn-off
+	  }
 	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
@@ -161,6 +173,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIO_LED_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : GPIO_SW_Pin */
+  GPIO_InitStruct.Pin = GPIO_SW_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIO_SW_GPIO_Port, &GPIO_InitStruct);
 
 }
 
