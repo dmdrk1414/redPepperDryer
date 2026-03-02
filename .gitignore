@@ -14,7 +14,6 @@
 .cproject
 .settings/
 .metadata/
-*.launch
 
 #######################################
 # Generated files
