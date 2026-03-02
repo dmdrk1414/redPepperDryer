@@ -5,3 +5,30 @@ Core : Arm Cortex-M3
 Package : LQFP48
 Flash : 64 KBytes
 Ram : 20KBytes
+
+
+📊 STM32F103 Flash Wait State 조건
+
+(2.0V~3.6V 기준, 일반적인 조건)
+
+SYSCLK	Flash Latency
+0 ~ 24 MHz	0 WS
+24 ~ 48 MHz	1 WS
+48 ~ 72 MHz	2 WS
+
+🔵 전체 부팅 흐름 (정확 버전)
+Reset 발생
+   ↓
+Reset_Handler (startup_stm32f103xb.s)
+   ↓
+SystemInit()        ← CMSIS 레벨
+   ↓
+main()
+   ↓
+HAL_Init()          ← HAL 프레임워크 초기화
+   ↓
+SystemClock_Config()← 실제 클럭 구성
+   ↓
+MX_GPIO_Init()      ← GPIO 설정
+   ↓
+while(1)
