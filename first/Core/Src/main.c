@@ -161,7 +161,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
+//  __HAL_RCC_GPIOC_CLK_ENABLE();
   volatile unsigned int * reg = 0x40021018UL;
   *reg |= (0x1UL << 4U);
 
@@ -172,12 +172,16 @@ static void MX_GPIO_Init(void)
   //HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET);
   *(volatile uint32_t*)(0x40011000UL + 0x10U) = ((0x1U << 13U) << 16U);
 
+
   /*Configure GPIO pin : GPIO_LED_Pin */
-  GPIO_InitStruct.Pin = GPIO_LED_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIO_LED_GPIO_Port, &GPIO_InitStruct);
+//  GPIO_InitStruct.Pin = GPIO_LED_Pin;
+//  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+//  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+//  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+//  HAL_GPIO_Init(GPIO_LED_GPIO_Port, &GPIO_InitStruct);
+
+  volatile unsigned int * reg2 = 0x40011004;
+  *reg2 = (*reg2 & ~(15UL << 20U)) | (3U << 20U);
 
   /*Configure GPIO pin : GPIO_SW_Pin */
   GPIO_InitStruct.Pin = GPIO_SW_Pin;
