@@ -103,11 +103,11 @@ int main(void)
   {
 	  isSwitch = HAL_GPIO_ReadPin(GPIO_SW_GPIO_Port, GPIO_SW_Pin); // sw Pull-Up Active-low
 
-	  if(isSwitch == LOW){
-		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_RESET); // turn-on led
-	  }else{
-		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET); // turn-off
-	  }
+//	  if(isSwitch == LOW){
+//		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_RESET); // turn-on led
+//	  }else{
+//		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET); // turn-off
+//	  }
 	  HAL_Delay(100);
     /* USER CODE END WHILE */
 
@@ -162,10 +162,15 @@ static void MX_GPIO_Init(void)
 
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
+  volatile unsigned int * reg = 0x40021018UL;
+  *reg |= (0x1UL << 4U);
+
+
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET);
+  //HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET);
+  *(volatile uint32_t*)(0x40011000UL + 0x10U) = ((0x1U << 13U) << 16U);
 
   /*Configure GPIO pin : GPIO_LED_Pin */
   GPIO_InitStruct.Pin = GPIO_LED_Pin;
