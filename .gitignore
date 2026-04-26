@@ -10,8 +10,6 @@
 #######################################
 # STM32CubeIDE metadata
 #######################################
-.project
-.cproject
 .settings/
 .metadata/
 
