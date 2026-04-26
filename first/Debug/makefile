@@ -61,8 +61,8 @@ all: main-build
 main-build: first.elf secondary-outputs
 
 # Tool invocations
-first.elf: $(OBJS) $(USER_OBJS) C:\work_space_cube\first\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "first.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\work_space_cube\first\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="first.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+first.elf: $(OBJS) $(USER_OBJS) C:\project\redPepperDryer\first\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "first.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\project\redPepperDryer\first\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="first.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
