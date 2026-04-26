@@ -92,7 +92,7 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  //MX_GPIO_Init();
+  MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   /* __HAL_RCC_GPIOC_CLK_ENABLE */
   volatile unsigned int * reg = 0x40021018UL;
@@ -176,7 +176,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
- __HAL_RCC_GPIOC_CLK_ENABLE();
+  __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
