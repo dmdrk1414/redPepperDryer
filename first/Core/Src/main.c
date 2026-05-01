@@ -95,13 +95,13 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   /* __HAL_RCC_GPIOC_CLK_ENABLE */
-  volatile unsigned int * reg = 0x40021018UL;
-  *reg |= (0x1UL << 4U);
+  /*volatile unsigned int * reg = 0x40021018UL;
+  *reg |= (0x1UL << 4U);*/
 
 
   /*  HAL_GPIO_Init(GPIO_SW_GPIO_Port, &GPIO_InitStruct); */
-  volatile unsigned int * reg2 = 0x40011004;
-  *reg2 = (*reg2 & ~(15UL << 20U)) | (3U << 20U);
+  /*volatile unsigned int * reg2 = 0x40011004;
+  *reg2 = (*reg2 & ~(15UL << 20U)) | (3U << 20U);*/
 
   /* USER CODE END 2 */
 
@@ -111,19 +111,19 @@ int main(void)
   {
 
 	  /* HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET); */
-	  *(volatile uint32_t*)(0x40011000UL + 0x10U) = ((0x1U << 13U) << 16U);
+	  /*(volatile uint32_t*)(0x40011000UL + 0x10U) = ((0x1U << 13U) << 16U);
 	  HAL_Delay(100);
 
 	  *(volatile uint32_t*)(0x40011000UL + 0x10U) = ((0x1U << 13U));
-	  HAL_Delay(100);
+	  HAL_Delay(100);*/
 
 	  isSwitch = HAL_GPIO_ReadPin(GPIO_SW_GPIO_Port, GPIO_SW_Pin); // sw Pull-Up Active-low
 
-//	  if(isSwitch == LOW){
-//		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_RESET); // turn-on led
-//	  }else{
-//		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET); // turn-off
-//	  }
+	  if(isSwitch == LOW){
+		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_RESET); // turn-on led
+	  }else{
+		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET); // turn-off
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
