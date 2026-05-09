@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "fnd_controller.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -105,6 +106,8 @@ int main(void)
   /*volatile unsigned int * reg = 0x40021018UL;
   *reg |= (0x1UL << 4U);*/
 
+  /* INIT FND */
+  init_fnd();
 
   /*  HAL_GPIO_Init(GPIO_SW_GPIO_Port, &GPIO_InitStruct); */
   /*volatile unsigned int * reg2 = 0x40011004;
@@ -136,12 +139,17 @@ int main(void)
 	  }
 
 	  /* SPI Start */
-	  HAL_SPI_Transmit(&hspi1, data, 5, 100); /* SPI_Step1. SPI Packet 보내�?? */
+	  HAL_SPI_Transmit(&hspi1, data, 5, 100); /* SPI_Step1. SPI Packet 보내�??? */
 	  HAL_Delay(100);
 
 	  /* Uart Start */
 	  HAL_UART_Transmit(&huart1, uartSendData, strlen(uartSendData), 1000);
 	  HAL_Delay(100);
+
+	  /* Start FND */
+	   for(int i = 0; i<=99; i++){
+			digit2(i, 0b0001, 50); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
+		}
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -267,9 +275,13 @@ static void MX_GPIO_Init(void)
   /* GPIO Ports Clock Enable */
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, FND_RCLK_Pin|FND_DID_Pin|FND_SCLK_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : GPIO_LED_Pin */
   GPIO_InitStruct.Pin = GPIO_LED_Pin;
@@ -283,6 +295,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIO_SW_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : FND_RCLK_Pin FND_DID_Pin FND_SCLK_Pin */
+  GPIO_InitStruct.Pin = FND_RCLK_Pin|FND_DID_Pin|FND_SCLK_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 }
 
