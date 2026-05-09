@@ -33,10 +33,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define FALSE 0x00U
-#define TRUE  0x01U
-#define LOW   0x00U
-#define HIGH  0x01U
 
 typedef unsigned char u8;
 typedef unsigned short u16;
@@ -78,7 +74,6 @@ static void MX_USART1_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  u8 isSwitch = 0x0u;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -102,54 +97,23 @@ int main(void)
   MX_SPI1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  /* __HAL_RCC_GPIOC_CLK_ENABLE */
-  /*volatile unsigned int * reg = 0x40021018UL;
-  *reg |= (0x1UL << 4U);*/
 
   /* INIT FND */
   init_fnd();
-
-  /*  HAL_GPIO_Init(GPIO_SW_GPIO_Port, &GPIO_InitStruct); */
-  /*volatile unsigned int * reg2 = 0x40011004;
-  *reg2 = (*reg2 & ~(15UL << 20U)) | (3U << 20U);*/
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
-  char data[10] = {'a', 'A', 'b', 'B' }; /* SPI_Step2 Data */
-  char uartSendData[20] = "hello world\r\n";
   while (1)
   {
-
-	  /* HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET); */
-	  /*(volatile uint32_t*)(0x40011000UL + 0x10U) = ((0x1U << 13U) << 16U);
-	  HAL_Delay(100);
-
-	  *(volatile uint32_t*)(0x40011000UL + 0x10U) = ((0x1U << 13U));
-	  HAL_Delay(100);*/
-
-	  isSwitch = HAL_GPIO_ReadPin(GPIO_SW_GPIO_Port, GPIO_SW_Pin); // sw Pull-Up Active-low
-
-	  if(isSwitch == LOW){
-		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_RESET); // turn-on led
-	  }else{
-		  HAL_GPIO_WritePin(GPIO_LED_GPIO_Port, GPIO_LED_Pin, GPIO_PIN_SET); // turn-off
-	  }
-
-	  /* SPI Start */
-	  HAL_SPI_Transmit(&hspi1, data, 5, 100); /* SPI_Step1. SPI Packet 보내�??? */
-	  HAL_Delay(100);
-
-	  /* Uart Start */
-	  HAL_UART_Transmit(&huart1, uartSendData, strlen(uartSendData), 1000);
-	  HAL_Delay(100);
 
 	  /* Start FND */
 	   for(int i = 0; i<=99; i++){
 			digit2(i, 0b0001, 50); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
 		}
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
