@@ -1,11 +1,11 @@
 #######################################
 # Build folders
 #######################################
-# /Debug/
-# /Release/
-# /build/
-# */Debug/
-# /*/Release/
+/Debug/
+/Release/
+build/
+*/Debug/
+/*/Release/
 
 #######################################
 # STM32CubeIDE metadata
