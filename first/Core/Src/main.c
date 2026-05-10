@@ -110,17 +110,22 @@ int main(void)
   {
 
 	  /* Start FND */
-	   for(int i = 0; i<=99; i++){
-			digit2(i, 0b0001, 50); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
-		}
+	  send_port(0xC6, 0b0001);
+	  send_port(0xC0, 0b0010);
+	  send_port(0xC2, 0b0100);
+	  send_port(0xAB , 0b1000);
 
-	   for(int i = 0; i<=100; i++){ /* 0099 show number*/
-		   digit4showZero_replay(i, 50);
-		}
-
-	   for(int i = 0; i<=9999; i++){ /* 9999 show number */
-		   digit4_replay(i, 50);
-		}
+//	   for(int i = 0; i<=99; i++){
+//			digit2(i, 0b0001, 50); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
+//		}
+//
+//	   for(int i = 0; i<=100; i++){ /* 0099 show number*/
+//		   digit4showZero_replay(i, 50);
+//		}
+//
+//	   for(int i = 0; i<=9999; i++){ /* 9999 show number */
+//		   digit4_replay(i, 50);
+//		}
 
 
     /* USER CODE END WHILE */
