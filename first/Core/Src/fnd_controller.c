@@ -1,10 +1,13 @@
 #include <stdint.h>
 #include "fnd_controller.h"
+#include "main.h"
 
 
 uint8_t _LED_0F[29];
+static SPI_HandleTypeDef *mhspi;
 
-void init_fnd(){
+void init_fnd(SPI_HandleTypeDef *hspi){
+	mhspi = hspi;
 _LED_0F[0] = 0xC0; //0
  _LED_0F[1] = 0xF9; //1
  _LED_0F[2] = 0xA4; //2
@@ -38,9 +41,9 @@ _LED_0F[0] = 0xC0; //0
 
 void send(uint8_t X){
 
-  for (int i = 8; i >= 1; i--)
+ /* for (int i = 8; i >= 1; i--)
   {
-	if (X & 0x80)
+	if (X & 0x80) // Select MSB
 	{
 	  HAL_GPIO_WritePin(FND_DID_GPIO_Port, FND_DID_Pin, HIGH);
 	}
@@ -51,7 +54,9 @@ void send(uint8_t X){
 	X <<= 1;
 	HAL_GPIO_WritePin(FND_SCLK_GPIO_Port, FND_SCLK_Pin, LOW);
 	HAL_GPIO_WritePin(FND_SCLK_GPIO_Port, FND_SCLK_Pin, HIGH);
-  }
+  }*/
+
+  HAL_SPI_Transmit(mhspi, &X, 1, 100);
 }
 
 
