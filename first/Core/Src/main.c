@@ -119,6 +119,7 @@ int main(void)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 //	   for(int i = 0; i<=99; i++){
 //			digit2(i, 0b0001, 50); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
 //		}
@@ -132,6 +133,8 @@ int main(void)
 //		}
 
 
+=======
+>>>>>>> parent of 0249960 (FN7 7세그먼트)
 =======
 >>>>>>> parent of 0249960 (FN7 7세그먼트)
 =======
