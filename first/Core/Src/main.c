@@ -66,7 +66,8 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+extern Ds18b20Sensor_t	ds18b20[_DS18B20_MAX_SENSORS];
+int temp = 0;
 /* USER CODE END 0 */
 
 /**
@@ -104,6 +105,7 @@ int main(void)
   init_fnd();
   Ds18b20_Init();
 
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,18 +114,24 @@ int main(void)
   while (1)
   {
 
+	  Ds18b20_ManualConvert();
+
+	  temp = (int)(ds18b20[0].Temperature * 100);
+
+	  digit4_replay(temp, 1000);
+
 	  /* Start FND */
-	   for(int i = 0; i<=99; i++){
-			digit2(i, 0b0001, 450); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
-		}
-
-	   for(int i = 0; i<=100; i++){ /* 0099 show number*/
-		   digit4showZero_replay(i, 450);
-		}
-
-	   for(int i = 0; i<=9999; i++){ /* 9999 show number */
-		   digit4_replay(i, 450);
-		}
+//	   for(int i = 0; i<=99; i++){
+//			digit2(i, 0b0001, 450); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
+//		}
+//
+//	   for(int i = 0; i<=100; i++){ /* 0099 show number*/
+//		   digit4showZero_replay(i, 450);
+//		}
+//
+//	   for(int i = 0; i<=9999; i++){ /* 9999 show number */
+//		   digit4_replay(i, 450);
+//		}
 
 //
     /* USER CODE END WHILE */
