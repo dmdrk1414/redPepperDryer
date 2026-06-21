@@ -22,6 +22,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include "fnd_controller.h"
+#include "ds18b20.h"
 
 /* USER CODE END Includes */
 
@@ -99,6 +102,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim2);
   /* INIT FND */
   init_fnd();
+  Ds18b20_Init();
 
   /* USER CODE END 2 */
 
@@ -110,15 +114,15 @@ int main(void)
 
 	  /* Start FND */
 	   for(int i = 0; i<=99; i++){
-			digit2(i, 0b0001, 50); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
+			digit2(i, 0b0001, 450); //send counter 0-99 with delay 50 cicles int 1st and 2nd view ports
 		}
 
 	   for(int i = 0; i<=100; i++){ /* 0099 show number*/
-		   digit4showZero_replay(i, 50);
+		   digit4showZero_replay(i, 450);
 		}
 
 	   for(int i = 0; i<=9999; i++){ /* 9999 show number */
-		   digit4_replay(i, 50);
+		   digit4_replay(i, 450);
 		}
 
 //
