@@ -118,7 +118,7 @@ int main(void)
 
 	  temp = (int)(ds18b20[0].Temperature * 100);
 
-	  digit4_replay(temp, 1000);
+	  digit4_temper(temp, 5000);
 
 	  /* Start FND */
 //	   for(int i = 0; i<=99; i++){
